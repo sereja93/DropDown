@@ -331,6 +331,10 @@ public final class DropDown: UIView {
 	@objc public dynamic var textColor = DPDConstant.UI.TextColor {
 		didSet { reloadAllComponents() }
 	}
+    
+    @objc public dynamic var numberOfLines = 0 {
+        didSet { reloadAllComponents() }
+    }
 
     /**
      The color of the text for selected cells of the drop down.
@@ -1063,6 +1067,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		}
 		
 		cell.optionLabel.textColor = textColor
+        cell.optionLabel.numberOfLines = numberOfLines
 		cell.optionLabel.font = textFont
 		cell.selectedBackgroundColor = selectionBackgroundColor
         cell.highlightTextColor = selectedTextColor
