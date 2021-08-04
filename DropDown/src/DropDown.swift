@@ -332,7 +332,7 @@ public final class DropDown: UIView {
 		didSet { reloadAllComponents() }
 	}
     
-    @objc public dynamic var numberOfLines = 0 {
+    @objc public dynamic var numberOfLines: Int = -1 {
         didSet { reloadAllComponents() }
     }
 
@@ -1067,7 +1067,10 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		}
 		
 		cell.optionLabel.textColor = textColor
-        cell.optionLabel.numberOfLines = numberOfLines
+        if numberOfLines >= 0 {
+            cell.optionLabel.numberOfLines = numberOfLines
+            cell.optionLabel.lineBreakMode = .byWordWrapping
+        }
 		cell.optionLabel.font = textFont
 		cell.selectedBackgroundColor = selectionBackgroundColor
         cell.highlightTextColor = selectedTextColor
