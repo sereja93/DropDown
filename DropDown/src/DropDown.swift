@@ -18,7 +18,7 @@ private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, 
 
 /// Can be `UIView` or `UIBarButtonItem`.
 @objc
-public protocol AnchorView: class {
+public protocol AnchorView: AnyObject {
 
 	var plainView: UIView { get }
 
@@ -1023,7 +1023,7 @@ extension DropDown {
 
 	/// Returns the height needed to display all cells.
 	fileprivate var tableHeight: CGFloat {
-		return tableView.rowHeight * CGFloat(dataSource.count)
+        return tableView.contentSize.height
 	}
 
     //MARK: Objective-C methods for converting the Swift type Index
@@ -1055,11 +1055,12 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: DPDConstant.ReusableIdentifier.DropDownCell, for: indexPath) as! DropDownCell
 		let index = (indexPath as NSIndexPath).row
-
 		configureCell(cell, at: index)
-
+        tableView.sizeToFit()
+        updateConstraints()
 		return cell
 	}
+    
 	
 	fileprivate func configureCell(_ cell: DropDownCell, at index: Int) {
 		if index >= 0 && index < localizationKeysDataSource.count {
@@ -1068,7 +1069,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		
 		cell.optionLabel.textColor = textColor
         if numberOfLines >= 0 {
-            cell.optionLabel.numberOfLines = numberOfLines
+            cell.optionLabel.numberOfLines = 0
             cell.optionLabel.lineBreakMode = .byWordWrapping
         }
 		cell.optionLabel.font = textFont

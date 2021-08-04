@@ -42,6 +42,7 @@ class ViewController: UIViewController {
 	
 	@IBAction func chooseArticle(_ sender: AnyObject) {
 		chooseArticleDropDown.show()
+//        chooseArticleDropDown.setNeedsUpdateConstraints()
 	}
 	
 	@IBAction func changeAmount(_ sender: AnyObject) {
@@ -169,12 +170,14 @@ class ViewController: UIViewController {
 		chooseArticleDropDown.bottomOffset = CGPoint(x: 0, y: chooseArticleButton.bounds.height)
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
+        chooseArticleDropDown.numberOfLines = 0
 		chooseArticleDropDown.dataSource = [
-			"iPhone SE | Black | 64G",
+			"iPhone SE | Black | 64G iPhone SE | Black | 64G iPhone SE | Black | 64G iPhone SE | Black | 64G",
 			"Samsung S7",
 			"Huawei P8 Lite Smartphone 4G",
 			"Asus Zenfone Max 4G",
-			"Apple Watwh | Sport Edition"
+			"Apple Watwh | Sport Edition",
+            "iPhone SE | Black | 64G iPhone SE | Black | 64G iPhone SE | Black | 64G iPhone SE | Black | 64G"
 		]
 		
 		// Action triggered on selection
